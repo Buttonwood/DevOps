@@ -7,3 +7,6 @@
 ## 2.配置工具
 ### 2.1 Ansible
 [Absible 模块示例](http://blog.csdn.net/iloveyin/article/details/46982023)
+
+[Learning Ansible with Vagrant](https://segmentfault.com/a/1190000005893208)
+
