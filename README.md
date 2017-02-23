@@ -1,2 +1,2 @@
 # DevOps
-Tools and useful reference articles for DevOps
+Useful tools and reference articles for DevOps
