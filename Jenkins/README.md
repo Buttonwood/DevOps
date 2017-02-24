@@ -8,3 +8,9 @@
 [持续集成+自动化部署[代码流水线管理及Jenkins和gitlab集成]](http://blog.csdn.net/abcdocker/article/details/53840629)
 
 [持续集成之代码质量管理-Sonar](http://blog.csdn.net/abcdocker/article/details/53840582)
+
+[Jenkins+Ansible+Gitlab自动化部署三剑客](http://www.showerlee.com/archives/1880)
+
+[持续集成之Jenkins+Gitlab简介](http://blog.csdn.net/abcdocker/article/details/53840449)
+
+[jenkins结合ansible用shell实现自动化部署和回滚](http://www.cnblogs.com/rwxwsblog/p/5667772.html)
