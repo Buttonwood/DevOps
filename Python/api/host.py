@@ -20,11 +20,11 @@ OS=$(/usr/bin/lsb_release -a |grep Description |awk -F : '{print $2}' |sed 's/^[
 else \
 OS=$(cat /etc/issue |sed -n '1p');\
 fi;\
-echo $OS;uptime"
+echo $OS;uptime|sed 's/\([0-9]\),\([0-9]\)/\\1.\\2/g'"
 		return self.cmd(cmd)
 
 	def cpu(self):
-		cmd = "grep 'processor' /proc/cpuinfo |sort |uniq |wc -l;grep 'physical id' /proc/cpuinfo |sort |uniq |wc -l;top -b -n 1 |grep Cpu | awk '{print $8}'"
+		cmd = "grep 'processor' /proc/cpuinfo |sort |uniq |wc -l;grep 'physical id' /proc/cpuinfo |sort |uniq |wc -l;top -b -n 1 |grep Cpu | awk '{print $8}'|sed 's/,/./g'"
 		#cmd = "grep 'physical id' /proc/cpuinfo |sort |uniq |wc -l"
 		return self.cmd(cmd)
 
@@ -38,7 +38,7 @@ echo $OS;uptime"
 		return self.cmd(cmd)
 
 	def disks(self):
-		cmd = "df -P|awk 'NR>1 {print $1,$2,$3,$4,$5,$6;}' OFS='|'"
+		cmd = "df -hP|awk 'NR>1 {print $1,$2,$3,$4,$5,$6;}' OFS='|'|sed 's/,/./g'"
 		#cmd = "df -hP|awk 'NR>1 {print $1,$2,$3,$4,$5,$6;}' OFS='|' |sed ':a;N;$!ba;s/\n/,/g'"
 		return self.cmd(cmd)
 
