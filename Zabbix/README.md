@@ -27,3 +27,11 @@
 [port discovery](http://www.tuicool.com/articles/VfMBnai)   
 [zabbix 监控lvs](http://www.tuicool.com/articles/ZRZ7VbM)   
 [ZABBIX 微信报警 插件](https://note.gitcloud.cc/blog/post/bluetom520/ZABBIX-%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6-%E6%8F%92%E4%BB%B6%EF%BC%88python%EF%BC%89)  
+
+[zabbix3.0 从坚持到用起 开始配置管理界面](http://blog.csdn.net/mchdba/article/details/51264263)
+
+[zabbix3.0 监控mysql服务器性能实现过程](http://blog.csdn.net/mchdba/article/details/51288767#comments)
+
+[zabbix3.0.2 使用percona mysql插件来监控mysql5.7的详细实现过程](http://blog.csdn.net/mchdba/article/details/51447750#comments)
+
+[zabbix3.0.2 监控oracle高可用dataguard的standby库状态详细过程](http://blog.csdn.net/mchdba/article/details/51520880#comments)
