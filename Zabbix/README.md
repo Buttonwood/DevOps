@@ -47,3 +47,21 @@ http://jaychang.iteye.com/blog/2215945
 http://www.cnblogs.com/zzzhfo/p/5884795.html    
 http://www.zabbix.org/wiki/Docs/howto/apache_monitoring_script    
 https://github.com/gpmidi/zabbix-apache-stats   
+
+
+[zabbix 性能调优](https://www.xiaomastack.com/2014/10/10/zabbix02/)
+
+[重构](https://www.xiaomastack.com/2015/07/30/refactoring-yunwei/)
+
+[zabbix oracle](http://blog.chinaunix.net/uid-28887495-id-3762869.html)
+
+[zabbix update](http://www.cnblogs.com/mrwang1101/p/5513158.html)
+
+[disk-io](http://blog.chinaunix.net/uid-26446098-id-4964263.html)
+
+[zabbix pyora](http://www.zabbix.org.cn/viewtopic.php?f=19&t=1085)
+
+[报警信息sql](http://www.zabbix.org.cn/viewtopic.php?f=17&t=104)
+
+
+[Grafana zabbix](http://blog.csdn.net/qq942477618/article/details/53909675)
