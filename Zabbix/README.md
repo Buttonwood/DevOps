@@ -65,3 +65,15 @@ https://github.com/gpmidi/zabbix-apache-stats
 
 
 [Grafana zabbix](http://blog.csdn.net/qq942477618/article/details/53909675)
+
+
+#### zabbix 3.0
+https://www.zabbix.com/documentation/3.4/manual/installation/install#installation_from_sources
+http://www.cnblogs.com/mrwang1101/p/5513158.html
+http://www.verydemo.com/demo_c158_i58404.html
+http://www.cnblogs.com/shihuc/p/6078285.html
+http://www.iyunv.com/thread-337453-1-1.html
+
+#### zabbix gateway
+http://blog.csdn.net/wych1981/article/details/46647451
+https://www.zabbix.com/documentation/3.2/manual/concepts/java
