@@ -35,3 +35,15 @@
 [zabbix3.0.2 使用percona mysql插件来监控mysql5.7的详细实现过程](http://blog.csdn.net/mchdba/article/details/51447750#comments)
 
 [zabbix3.0.2 监控oracle高可用dataguard的standby库状态详细过程](http://blog.csdn.net/mchdba/article/details/51520880#comments)
+
+
+
+#### Zabbix API
+https://www.zabbix.com/documentation/2.2/manual/api
+
+#### Zabbix Apache
+http://www.showerlee.com/archives/656   
+http://jaychang.iteye.com/blog/2215945    
+http://www.cnblogs.com/zzzhfo/p/5884795.html    
+http://www.zabbix.org/wiki/Docs/howto/apache_monitoring_script    
+https://github.com/gpmidi/zabbix-apache-stats   
