@@ -102,3 +102,9 @@ for /f "delims='\' tokens=2,3*" %%a in (E:\tanhao\test\file1.txt) do (
 )
 ```
 
+进程检查
+```
+@echo off
+tasklist /nh|find /i "chrome.exe" /c
+exit
+```
