@@ -1,4 +1,4 @@
-#### 基本
+#### 1. 基本事项
 ##### 1.    Whitespace
 *    http://www.python.org/dev/peps/pep-0008
 *    4个空格键代替tab键
@@ -68,3 +68,191 @@ def to_str(input):
         value = input
     return value
 ```
+
+##### 5.    unpacking
+```
+>>> a, b, *rest = range(10)
+>>> a, *rest, b = range(10)
+>>> *rest, a, b = range(10)
+
+>>> with open("using_python_to_profit") as f:
+        first, *_, last = f.readlines()
+
+def f(*args):
+    a, b, *args = args
+    pass
+```
+
+##### 6.    yield from
+```
+def dup(n):
+  for i in range(n):
+      yield i
+      yield i
+      
+def dup(n):
+  for i in range(n):
+      yield from [i, i]
+```
+
+##### 7.    asyncio
+Uses new coroutine features and saved state of generators to do asynchronous IO.
+
+```
+"""
+Taken from Guido's slides from “Tulip: Async I/O for Python 3
+by Guido van Rossum, at LinkedIn, Mountain View, Jan 23, 2014
+"""
+@coroutine
+def fetch(host, port):
+  r,w = yield from open_connection(host,port)
+  w.write(b'GET /HTTP/1.0\r\n\r\n ')
+  while (yield from r.readline()).decode('latin-1').strip():
+      pass
+  body=yield from r.read()
+  return body
+
+@coroutine
+def start():
+  data = yield from fetch('python.org', 80)
+  print(data.decode('utf-8'))
+```
+
+##### 8.    Standard Library
+```
+ipaddress
+functools.lru_cache
+
+from enum import Enum
+
+from pathlib import Path
+
+```
+
+##### 9.    Slice Sequences
+```
+a = ['a','b','c','d','e','f','g','h','i']
+assert a[:4] == a[0:4]
+assert a[-4:] == a[-4:len(a)]
+a[3:-3]
+a[::-1]
+
+'''
+copy
+'''
+b = a[:] 
+assert b == a and b is not a
+
+'''
+same
+'''
+b = a
+assert a is b
+
+
+odds = a[::2]
+evens = a[1::2]
+
+from itertools import islice
+```
+
+*    Avoid using start, end and stride in a single slice
+*    Avoid negative stride values if possible.
+
+##### 10. 列式推导代替`map/filter`
+```
+[x**2 for x in alist]
+map(lambda x: x^2, alist)
+
+[x**2 for x in alist if x %2 == 0]
+map(lambda x: x^2, filter(lambda x: x %2 == 0, alist))
+
+{v: k fro k, v in adict}
+{len(k) fro k in adict}
+{len(k) fro k in aset}
+```
+
+##### 11. 列式推导中避免两个以上的表达式
+```
+[x for row in amatrix for x in row]
+[[x^2 for x in row] for row in amatrix]
+[x for x in alist if x > 4 and x % 2 == 0]
+```
+
+##### 12. 生成式代替大型列表推导
+```
+it = (len(x) for x in open('test.txt'))
+print(next(it))
+print(next(it))
+
+roots = ((x, x**0.5) for x in it)
+print(next(roots))
+```
+
+##### 13. `enumerate`胜过`range`
+```
+>>> alist = ['a','b','c','d','e','f','g','h','i']
+>>> {idx: item for idx, item in enumerate(alist)}
+{0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h', 8: 'i'}
+>>> {idx: item for idx, item in enumerate(alist, 5)}
+{5: 'a', 6: 'b', 7: 'c', 8: 'd', 9: 'e', 10: 'f', 11: 'g', 12: 'h', 13: 'i'}
+>>>
+```
+
+##### 14.    ｀zip｀并行迭代
+```
+>>> alist = ['a','b','c','d','e','f','g','h','i']
+>>> blist = [1,2,3]
+>>> {a:b for a,b in zip(alist,blist)}
+{'a': 1, 'c': 3, 'b': 2}
+```
+
+
+#### 2. 函数技巧
+##### 15. 异常返回`None`
+```
+def divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return None
+```
+
+##### 16. 可变参数
+```
+def agenerator():
+    for i in xrange(10):
+        yield i
+       
+def afunc(*args):
+    print(args)
+
+it = agenerator()
+afunc(*it)
+afunc(1,2,3)
+```
+
+##### 17. keyword arguments默认参数即字典参数
+```
+def afunc(a, b, c=1):
+    return a * b * c
+```
+
+##### 18. `None`及`Docstrings` 定制化动态默认参数
+对参数是`mutable`的变量尤其重要(dict,list,{},[]).
+
+```
+def log(msg, when=None):
+    """Log a message with a timestamp.
+    
+    Args:
+        msg: Message to print.
+        when: datetime of when the message occurred.
+            Defaults to the pesent time.
+    """
+    when = datetime.now() if when is None else when
+    print("%s:%s" % (when, msg))
+```
+
+#### References
+http://www.asmeurer.com/python3-presentation/slides.html#72
