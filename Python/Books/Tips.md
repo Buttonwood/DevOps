@@ -20,10 +20,13 @@
 ##### 3.    Expressions and Statements
 *    `if a is not b` inline negation
 *    `if not somelist` 判断空数组或字符串时不要用长度表达式
-*    `if somelist` 对非空列表或字符串为真
-*    `import some-module` 先导入模块
+*    `if somelist` 对非空列表或字符串为真, `l = []` 不能用 `if l is not None` 而用 `if l:`
+*    `import some-module` 先导入模块
 *    `from bar import foo` 只导入所需,且用绝对目录
-*    代码检查[pylint](http://www.pylint.org/)
+*   代码检查[pylint](http://www.pylint.org/)
+*   `a is b` 相当于 `id(a) == id(b)` 内存空间相同,不可重载
+*   ` a == b` 相当于 `a.__eq__(b)` 内容是否相等,可重载
+*   `i += 1 `不同于`++i`; `++i`和`--i`不同于自增自减,只是正负号
 
 ##### 4.    bytes, str and unicode
 *    Python3中`bytes`是`raw 8-bit values`;`str`是`unicode characters`
@@ -67,6 +70,17 @@ def to_str(input):
     else:
         value = input
     return value
+```
+
+*   字符串连接用`join()` 优于 `+`
+*   格式化字符串用`.format()` 优于 `%`
+
+```
+>>> s = ('SELECT * '
+...      'FROM table '
+...      'WHERE field="value"')
+>>> s
+'SELECT * FROM table WHERE field="value"'
 ```
 
 ##### 5.    unpacking
@@ -126,6 +140,14 @@ functools.lru_cache
 from enum import Enum
 
 from pathlib import Path
+
+import ConfigParser
+
+from collections import Counter
+
+from copy import deepcopy
+
+import argparse
 
 ```
 
@@ -199,6 +221,21 @@ print(next(roots))
 >>>
 ```
 
+```
+def enumerate(squence, start=0):
+    n = start
+    for elem in sequence:
+        yield n, elem   # 666
+        n += 1
+
+# 反序号
+def reversed_enumerate(squence):
+    n = -1
+    for elem in reversed(sequence):
+        yield len(sequence) + n, elem
+        n -= 1
+```
+
 ##### 14.    ｀zip｀并行迭代
 ```
 >>> alist = ['a','b','c','d','e','f','g','h','i']
@@ -252,6 +289,26 @@ def log(msg, when=None):
     """
     when = datetime.now() if when is None else when
     print("%s:%s" % (when, msg))
+```
+
+##### 19. `with`上下文管理
+```
+with open('test.txt', 'w') as f:
+    f.write('test')
+    ... 
+```
+
+```
+from contextlib import contextmanager
+
+@contextmanager
+def tag(name):
+    print "<%s>" % name
+    yield
+    print "</%s>" % name
+
+with tag("h1"):
+    print "foo"
 ```
 
 #### References
