@@ -31,13 +31,51 @@ EOF >> /etc/hosts
 
 ##### 5. es
 
+*    新增es用户
+   
 ```
 groupadd es && useradd es -g es -p es
 chown -R es:es /usr/share/elasticsearch-5.4.0/
 mkdir -p /data/es
 chown -R es:es /data/es
-su es
-
 ```
 
-vi /etc/security/limits.conf
+*    系统优化
+
+```
+cat << EOF
+* soft nofile 65555
+* hard nofile 65555
+EOF >> /etc/security/limits.conf
+
+
+vim /etc/security/limits.d/90-nproc.conf
+*          soft    nproc     unlimited
+root       soft    nproc     unlimited
+
+sysctl -w vm.max_map_count=262144 && sysctl -p /etc/sysctl.conf
+```
+
+*    启动
+
+```
+$ grep -v "#" /usr/share/elasticsearch-5.4.0/config/elasticsearch.yml|sed '/^$/d'
+cluster.name: ES_app
+node.name: jp05
+path.data: /data/es/data
+path.logs: /data/es/logs
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+network.host: "0.0.0.0"
+discovery.zen.minimum_master_nodes: 3
+discovery.zen.ping.unicast.hosts: ["jp01","jp02","jp03","jp04","jp05"]
+
+$ su es
+/usr/share/elasticsearch-5.4.0/bin/elasticsearch -d
+tail /data/es/logs/ES_app.log
+```
+
+##### References
+http://www.cnblogs.com/jstarseven/p/6803054.html
