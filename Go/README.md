@@ -225,6 +225,105 @@ slice := source[2:3:3]
 slice = append(slice, "Kiwi")
 ```
 
+```
+slice := [][]int{{10}, {100, 200}}
+slice[0] = append(slice[0], 20)
+
+slice := make([]int , 1000000)
+
+slice = foo(slice)
+
+func foo(slice []int) []int {
+	return slice
+}
+```
+
+##### Map
+1.	The map key can be a value from any built-in or struct type as long as the value can be used in an expression with the `==` operator. 
+2. Slices, functions, and struct types that contain slices can’t be used as map keys. 
+3. Passing a map between two functions doesn’t make a copy of the map.
+4. The built-in function `len` can be used to retrieve the length of a slice or map.
+5. The built-in function `cap` only works on slices.
+
+
+```
+dict := make(map[string]int)
+dict := map[string]string{"Red": "#da1337", "Orange": "#e95a22"}
+
+// Create a map using a slice of strings as the value.
+dict := map[int][]string{}
+
+colors := map[string]string{}
+colors["Red"] = "#da1337"
+```
+
+```
+// Create a nil map by just declaring the map.
+var colors map[string]string
+
+// Retrieve the value for the key "Blue".
+value, exists := colors["Blue"]
+// Did this key exist?
+if exists {
+    fmt.Println(value)
+}
+```
+
+
+```
+// Create a map of colors and color hex codes.
+colors := map[string]string{
+    "AliceBlue":   "#f0f8ff",
+    "Coral":       "#ff7F50",
+    "DarkGray":    "#a9a9a9",
+    "ForestGreen": "#228b22",
+}
+
+// Remove the key/value pair for the key "Coral".
+delete(colors, "Coral")
+
+// Display all the colors in the map.
+for key, value := range colors {
+    fmt.Printf("Key: %s  Value: %s\n", key, value)
+}
+```
+
+#### User-defined types
+```
+type user struct {
+	name	string
+	email	string
+	ext		int
+	privileged	bool
+}
+
+var bill user
+```
+
+```
+// Declare a variable of type user and initialize all the fields.
+lisa := user {
+	name:	"Lisa",
+	email:	"",
+	ext: 123,
+	privileged: true,
+}
+```
+
+Creating a struct type value using a struct literal
+```
+user {
+	name:	"Lisa",
+	email:	"",
+	ext: 123,
+	privileged: true,
+}
+
+// Creating a struct type value without declaring the field names
+lisa := user{"Lisa", "lisa@email.com", 123, true}
+```
+
+
 If you specify a value inside the `[ ]` operator, you’re creating an array. If
 you don’t specify a value, you’re creating a slice.
 
