@@ -39,6 +39,13 @@ find /home/weblogic/update/ -type f |while read aa;do echo "stat -t $aa|awk '{pr
 OUT=`df -hP|sed '/^Filesystem/d'|awk '{print $(NF-1)"@"$NF"@"$1;}'|sed ':a;N;$!ba;s/\n/|/g'`
 OUT=`df -hP|sed '/^Filesystem/d'|grep "$1$"|awk '{print $(NF-1)"@"$NF"@"$1;}'|sed ':a;N;$!ba;s/\n/|/g'`
 ```
+
+##### 2.3.1 生成挂载文件表格
+```
+df -PTh | column -t| sort -n -k6n|awk 'BEGIN{print "<html><body><table border=1>"} {print "<tr>";for(i=1;i<=NF;i++)print "<td><font color='#00000'>" $i"</td></font>";print "</tr>"} END{print "</table></body></html>"}' |sed -e '10d' >disks.html
+```
+
+
 #### 2.4  windows生成批量重命名脚本
 ```
 @echo off
