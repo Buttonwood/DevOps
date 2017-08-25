@@ -189,6 +189,8 @@ func foo(array *[1e6]int) {
 }
 ```
 
+If you specify a value inside the `[ ]` operator, you’re creating an array. If
+you don’t specify a value, you’re creating a slice.
 
 ##### Slice
 ```
@@ -321,6 +323,156 @@ user {
 
 // Creating a struct type value without declaring the field names
 lisa := user{"Lisa", "lisa@email.com", 123, true}
+```
+
+```
+// admin represents an admin user with privileges.
+type admin struct {
+	person	user
+	level	string
+}
+
+// Declare a variable of type admin
+fred := admin {
+	person: user{
+		name: "Lisa",
+		email: "lisa@email.com",
+		ext: 123,
+		privileged: true,
+	},
+	level: "super",
+}
+```
+
+
+#### Mdethods
+1.	Methods provide a way to add behavior to user-defined types.
+2.	The parameter between the keyword `func` and the function name is called a `receiver` and binds the function to the specified type.
+3.	When a function has a `receiver`, that function is called a `method`.
+4.	`value receiver`传值拷贝,返回新值; `pointer receiver`传地址指向,改变值
+
+```
+type user struct {
+	name 	string
+	email	string
+}
+
+// notify implements a method with a value receiver
+func (u user) notify(){
+	fmt.Printf("Sending User Email To %s<%s>\n", u.name, u.email)
+}
+
+// changeEmail implements a method with a pointer receiver
+func (u *user) changeEmail(email string){
+	u.email = email
+}
+
+func main(){
+	bill := user{"Bill","bill@msn.com"}
+	bill.notify()
+
+	lisa := &user{"Lisa", "lisa@email.com"}
+	lisa.notify()
+	//(*lisa).notify()
+
+	bill.changeEmail("bill@newdomain.com")
+	bill.notify()
+
+	lisa.changeEmail("lisa@comcast.com")
+	lisa.notify()
+	//(&bill).notify()
+}
+```
+
+#### Reference types
+1.	Reference types in Go are the set of slice, map, channel, interface, and function types.
+
+```
+type IP []byte
+
+func (ip IP) MarshalText() ([]byte, error) {
+	if len(ip) == 0 {
+		return []byte(""), nil
+	}
+	if len(ip) != IPv4len && len(ip) != IPv6len{
+		return nil, errors.New("Invalid IP address")
+	}
+	return []byte(ip.String()), nil
+}
+
+func ipEmptyString(ip IP) string{
+	if len(ip) == 0 {
+		return ""
+	}
+	return ip.String()
+}
+```
+
+####  package
+1.	包内访问,小写开头的type/interface/func等(private)
+2.	包外访问,大写开头的type/interface/func等(public)
+
+
+#### Concurrency
+1.	Parallelism is about doing a lot of things at once.
+2.	Concurrency is about managing a lot of things at once.
+3.	Parallelism can only be achieved when multiple pieces of code are executing simultaneously against different physical processors.
+
+```
+// wg is used to wait for the program to finish.
+var wg sync.WaitGroup
+
+// When the value of a WaitGroup is greater than zero, the Wait method will block.
+wg.Add(2)
+
+go func(){
+	// Schedule the call to Done to tell main we are done.
+	defer wg.Done()
+}
+```
+
+```
+import "runtime"
+// Allocate a logical processor for every available core.
+runtime.GOMAXPROCS(runtime.NumCPU())
+```
+
+##### Race conditions
+
+```
+go build -race // Build the code using the race detector flag
+./example // Run the code
+```
+
+##### Locking shared resources
+```
+import (
+	"fmt"
+	"runtime"
+	"sync"
+	"sync/atomic"
+)
+
+var (
+	counter int64
+	wg sync.WaitGroup
+)
+
+func main() {
+	wg.Add(2)
+	go incCounter(1)
+	go incCounter(2)
+	wg.Wait()
+	fmt.Println("Final Counter:", counter)
+}
+
+func incCounter(id int) {
+	defer wg.Done()
+	for count := 0; count < 2; count++ {
+		atomic.AddInt64(&counter, 1)
+		runtime.Gosched()
+	}	
+}
 ```
 
 
