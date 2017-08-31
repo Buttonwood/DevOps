@@ -84,7 +84,7 @@ for /f "tokens=1,2* delims=" %%i in (%TODIR%\list.txt) do (
 pause
 ```
 
-windows 截取字符串
+#### 2.5 windows 截取字符串
 ```
 @echo off
 set str=_123456789
@@ -96,7 +96,7 @@ echo %str%
 pause
 ```
 
-文件查找
+#### 2.6 windows文件查找
 ```
 @echo off
 dir /b/s/a:-D E:\tanhao\test |find "_" > E:\tanhao\test\file1.txt
@@ -109,9 +109,15 @@ for /f "delims='\' tokens=2,3*" %%a in (E:\tanhao\test\file1.txt) do (
 )
 ```
 
-进程检查
+#### 2.7 windows进程检查
 ```
 @echo off
 tasklist /nh|find /i "chrome.exe" /c
 exit
+```
+#### 2.8 IP匹配
+```
+cat * |grep "jdbc" |grep -v DESCRIPTION |sed 's#\\##g'|grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}\:[0-9]{1,4}" |sort |uniq  >~/db.port.txt.1
+
+ cat * |grep "jdbc" |grep DESCRIPTION |sed 's#\\##g' |sed 's# ##g'|grep -E -o "HOST=([0-9]{1,3}[\.]){3}[0-9]{1,3}\)\(PORT=[0-9]{1,4}"|sed 's#)(PORT=#:#g'|sed 's#HOST=##g' |sort |uniq  >> ~/db.port.txt.1
 ```
