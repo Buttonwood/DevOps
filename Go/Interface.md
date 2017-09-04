@@ -193,3 +193,7 @@ p := reflect.ValueOf(&x)
 v := p.Elem()
 v.SetFloat(7.1)
 ```
+
+
+#### References
+[Go Interface](https://studygolang.com/articles/7865)
