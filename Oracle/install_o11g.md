@@ -106,6 +106,9 @@ export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/usr/lib
 [oracle@database database]$  ./runInstaller -ignoreSysPrereqs -ignorePrereq -silent -responseFile ./response/db_install.rsp
 ```
 
+![](https://note.youdao.com/yws/public/resource/48e0070db5900fc9d2872f981d95f090/xmlnote/4C364C36813C4F0199E8F5B7A7857BFE/15528)
+
+![](https://note.youdao.com/yws/public/resource/48e0070db5900fc9d2872f981d95f090/xmlnote/684E7E226C944233B2E77DFACB97ED66/15530)
 
 ### 5. 测试链接
 ```
