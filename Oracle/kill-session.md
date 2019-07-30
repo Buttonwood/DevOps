@@ -1,6 +1,3 @@
-
-
-
 ### step 1
 ```
 // pid
@@ -32,3 +29,6 @@ select 'alter system kill session ',
  where t1.session_id = t2.sid
  order by t2.logon_time;
 ```
+
+### References
+* https://www.cnblogs.com/kerrycode/p/4034231.html
